@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Andrew Lee
+# OSU Email: leea6@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 3
+# Due Date: 10/31/2022
+# Description: Implementing singly linked lists
 
 
 from SLNode import *
@@ -68,22 +68,28 @@ class LinkedList:
     # ------------------------------------------------------------------ #
 
     def insert_front(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        new_node = SLNode(value, self._head.next)
+        self._head = SLNode(None, new_node)
 
     def insert_back(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        current = self._head
+        for x in range (self.length()):
+            current = current.next
+        current.next = SLNode(value, None)
+
 
     def insert_at_index(self, index: int, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        if index < 0 or index > self.length():
+            raise SLLException
+        current = self._head
+        if index == 0:
+            self.insert_front(value)
+        else:
+            for x in range (index):
+                current = current.next
+            new_node = SLNode(value, current.next)
+            current.next = new_node
+
 
     def remove_at_index(self, index: int) -> None:
         """
@@ -142,7 +148,7 @@ if __name__ == "__main__":
             print(lst)
         except Exception as e:
             print(type(e))
-
+'''
     print("\n# remove_at_index example 1")
     lst = LinkedList([1, 2, 3, 4, 5, 6])
     print(f"Initial LinkedList : {lst}")
@@ -197,3 +203,5 @@ if __name__ == "__main__":
             print(" :", lst.slice(index, size))
         except:
             print(" : exception occurred.")
+'''
+
