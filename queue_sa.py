@@ -1,8 +1,8 @@
-# Name:
-# OSU Email:
+# Name: Andrew Lee
+# OSU Email: leea6@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
+# Assignment: Assignment 3
+# Due Date: 10/31/2022
 # Description:
 
 
