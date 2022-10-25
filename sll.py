@@ -92,22 +92,35 @@ class LinkedList:
 
 
     def remove_at_index(self, index: int) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        if index < 0 or index > self.length() -1:
+            raise SLLException
+        current = self._head
+        for x in range(index):
+            current = current.next
+        current.next = current.next.next
 
     def remove(self, value: object) -> bool:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        before = self._head
+        current = self._head.next
+        for x in range(self.length()):
+            try:
+                if current.value == value:
+                    before.next = current.next
+                    return True
+                before = before.next
+                current = current.next
+            except:
+                return False
+        return False
 
     def count(self, value: object) -> int:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        counts = 0
+        current = self._head
+        for x in range(self.length()+1):
+            if current.value == value:
+                counts += 1
+            current = current.next
+        return counts
 
     def find(self, value: object) -> bool:
         """
@@ -148,7 +161,7 @@ if __name__ == "__main__":
             print(lst)
         except Exception as e:
             print(type(e))
-'''
+
     print("\n# remove_at_index example 1")
     lst = LinkedList([1, 2, 3, 4, 5, 6])
     print(f"Initial LinkedList : {lst}")
@@ -166,7 +179,6 @@ if __name__ == "__main__":
     for value in [7, 3, 3, 3, 3]:
         print(f"remove({value}): {lst.remove(value)}, Length: {lst.length()}"
               f"\n {lst}")
-
     print("\n# remove example 2")
     lst = LinkedList([1, 2, 3, 1, 2, 3, 1, 2, 3])
     print(f"Initial LinkedList, Length: {lst.length()}\n  {lst}")
@@ -174,10 +186,12 @@ if __name__ == "__main__":
         print(f"remove({value}): {lst.remove(value)}, Length: {lst.length()}"
               f"\n {lst}")
 
+
     print("\n# count example 1")
     lst = LinkedList([1, 2, 3, 1, 2, 2])
     print(lst, lst.count(1), lst.count(2), lst.count(3), lst.count(4))
 
+'''
     print("\n# find example 1")
     lst = LinkedList(["Waldo", "Clark Kent", "Homer", "Santa Claus"])
     print(lst)
