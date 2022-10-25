@@ -123,16 +123,26 @@ class LinkedList:
         return counts
 
     def find(self, value: object) -> bool:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        current = self._head
+        for x in range(self.length()+1):
+            if current.value == value:
+                return True
+            current = current.next
+        return False
 
     def slice(self, start_index: int, size: int) -> "LinkedList":
-        """
-        TODO: Write this implementation
-        """
-        pass
+        if start_index < 0 or start_index > self.length() - 1 or start_index + size > self.length():
+            raise SLLException
+        current = self._head
+        for x in range(start_index):
+            current = current.next
+        new_list = LinkedList()
+        current = current.next
+        for x in range(size):
+            new_list.insert_back(current.value)
+            current = current.next
+        return new_list
+
 
 
 if __name__ == "__main__":
@@ -191,7 +201,7 @@ if __name__ == "__main__":
     lst = LinkedList([1, 2, 3, 1, 2, 2])
     print(lst, lst.count(1), lst.count(2), lst.count(3), lst.count(4))
 
-'''
+
     print("\n# find example 1")
     lst = LinkedList(["Waldo", "Clark Kent", "Homer", "Santa Claus"])
     print(lst)
@@ -217,5 +227,4 @@ if __name__ == "__main__":
             print(" :", lst.slice(index, size))
         except:
             print(" : exception occurred.")
-'''
 
