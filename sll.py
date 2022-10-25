@@ -131,7 +131,7 @@ class LinkedList:
         return False
 
     def slice(self, start_index: int, size: int) -> "LinkedList":
-        if start_index < 0 or start_index > self.length() - 1 or start_index + size > self.length():
+        if start_index < 0 or start_index > self.length() - 1 or start_index + size > self.length() or size<0:
             raise SLLException
         current = self._head
         for x in range(start_index):
