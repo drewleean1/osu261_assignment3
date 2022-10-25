@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Andrew Lee
+# OSU Email: leea6@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 3
+# Due Date: 10/31/22
+# Description: An implementation of a stack data structure using dynamic arrays
 
 
 from dynamic_array import *
@@ -51,22 +51,24 @@ class Stack:
     # -----------------------------------------------------------------------
 
     def push(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method that puts given value to the top of the stack. Calls DynamicArray's append method'''
+        self._da.append(value)
 
     def pop(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method that removes the top value of the stack and returns the top value. Raises an exception if stack is
+        empty. Calls DynamicArray's remove_at_index method'''
+        if self.is_empty():
+            raise StackException
+        value = self._da[self.size()-1]
+        self._da.remove_at_index(self.size()-1)
+        return value
 
     def top(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method that returns the top value of the stack. Raises an exception if stack is empty.'''
+        if self.is_empty():
+            raise StackException
+        return self._da[self.size()-1]
+
 
 
 # ------------------- BASIC TESTING -----------------------------------------
