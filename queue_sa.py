@@ -82,7 +82,9 @@ class Queue:
         if (self._front+self.size()) < self._sa.length():
             self._sa[self._front+self.size()] = value
         else:
-            self._sa[(self._front+self.size()) // self._sa.length()] = value          #try this for now
+            self._sa[abs(self._sa.length()-(self._front+self.size()))] = value          #try this for now
+
+
         self._current_size += 1
 
     def dequeue(self) -> object:
