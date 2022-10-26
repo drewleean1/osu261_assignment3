@@ -67,16 +67,32 @@ class Queue:
     # ---------------------------------------------------------------------- #
 
     def enqueue(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        if self.size() == self._sa.length():
+            new_sa = StaticArray(self._sa.length()*2)
+            x = 0
+            front = self._front
+            for x in range(self.size()):
+                new_sa[x] = self._sa[front]
+                x += 1
+                if front + 1> self.size():
+                    front = 0
+                else: front += 1
+            self._sa = new_sa
+            self._front = 0
+        if (self._front+self.size()) < self._sa.length():
+            self._sa[self._front+self.size()] = value
+        else:
+            self._sa[(self._front+self.size()) // self._sa.length()] = value          #try this for now
+        self._current_size += 1
 
     def dequeue(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        value_returned = self._sa[self._front]
+        self._sa[self._front] = None
+        if self._front + 1 > self.size():
+            self._front = 0
+        else:
+            self._front += 1
+        return value_returned
 
     def front(self) -> object:
         """
@@ -102,7 +118,7 @@ if __name__ == "__main__":
     print("\n# enqueue()")
     q = Queue()
     print(q)
-    for value in [1, 2, 3, 4, 5]:
+    for value in [1, 2, 3, 4,5]:
         q.enqueue(value)
     print(q)
 
@@ -120,7 +136,7 @@ if __name__ == "__main__":
         q.enqueue(value)
     print(q)
     q.print_underlying_sa()
-
+'''
     print("\n# front()")
     q = Queue()
     print(q)
@@ -180,3 +196,4 @@ if __name__ == "__main__":
     action_and_print("# Enqueue: 22, 24, 26, 28", q.enqueue,
                      [22, 24, 26, 28], q)
     action_and_print("# Enqueue: 30", q.enqueue, [30], q)
+'''
