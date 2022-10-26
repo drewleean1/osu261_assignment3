@@ -89,11 +89,11 @@ class Queue:
         if self.size() == 0:
             raise QueueException
         value_returned = self._sa[self._front]
-        self._sa[self._front] = None
-        if self._front + 1 > self.size():
-            self._front = 0
-        else:
-            self._front += 1
+        #self._sa[self._front] = None
+        #if self._front + 1 > self.size():
+        #    self._front = 0
+        #else:
+        self._front += 1
         self._current_size -= 1
         return value_returned
 
