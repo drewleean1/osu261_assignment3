@@ -74,7 +74,7 @@ class Queue:
             for x in range(self.size()):
                 new_sa[x] = self._sa[front]
                 x += 1
-                if front + 1> self.size():
+                if front + 1 >= self._sa.length():
                     front = 0
                 else: front += 1
             self._sa = new_sa
@@ -139,6 +139,10 @@ if __name__ == "__main__":
         except Exception as e:
             print("No elements in queue", type(e))
     for value in [6, 7, 8, 111, 222, 3333, 4444]:
+        q.enqueue(value)
+    print(q)
+    q.print_underlying_sa()
+    for value in [1,2,3,4,5]:
         q.enqueue(value)
     print(q)
     q.print_underlying_sa()
