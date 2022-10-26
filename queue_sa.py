@@ -86,6 +86,8 @@ class Queue:
         self._current_size += 1
 
     def dequeue(self) -> object:
+        if self.size() == 0:
+            raise QueueException
         value_returned = self._sa[self._front]
         self._sa[self._front] = None
         if self._front + 1 > self.size():
