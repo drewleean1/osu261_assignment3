@@ -94,6 +94,7 @@ class Queue:
             self._front = 0
         else:
             self._front += 1
+        self._current_size -= 1
         return value_returned
 
     def front(self) -> object:
