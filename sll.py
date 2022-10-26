@@ -68,17 +68,20 @@ class LinkedList:
     # ------------------------------------------------------------------ #
 
     def insert_front(self, value: object) -> None:
+        '''method adds given value to the front of the list '''
         new_node = SLNode(value, self._head.next)
         self._head = SLNode(None, new_node)
 
     def insert_back(self, value: object) -> None:
+        '''method adds given value to the back of the list.'''
         current = self._head
-        for x in range (self.length()):
+        for x in range (self.length()):                 #for loop to iterate to back of the list
             current = current.next
         current.next = SLNode(value, None)
 
 
     def insert_at_index(self, index: int, value: object) -> None:
+        '''method inserts given value at the given value. Raises an exception if the index is invalid.'''
         if index < 0 or index > self.length():
             raise SLLException
         current = self._head
@@ -92,20 +95,24 @@ class LinkedList:
 
 
     def remove_at_index(self, index: int) -> None:
+        '''method removes the value at the given index and raises an exception if the given index is invalid'''
         if index < 0 or index > self.length() -1:
             raise SLLException
         current = self._head
         for x in range(index):
             current = current.next
-        current.next = current.next.next
+        current.next = current.next.next                            #'skip' over the node we wish to remove
 
     def remove(self, value: object) -> bool:
-        before = self._head
+        '''method removes the first element of the given value in the list. Returns a bool based on whether or not we
+        removed the element from the list'''
+        before = self._head                                 #double pointers to keep track of where we are in the list
         current = self._head.next
         for x in range(self.length()):
             try:
+            #try and except so that if we get an exception, we know we didn't find the given value
                 if current.value == value:
-                    before.next = current.next
+                    before.next = current.next              #utilize our double pointers to skip the node we want removed
                     return True
                 before = before.next
                 current = current.next
@@ -114,6 +121,7 @@ class LinkedList:
         return False
 
     def count(self, value: object) -> int:
+        '''method returns the total number of the given value in the list'''
         counts = 0
         current = self._head
         for x in range(self.length()+1):
@@ -123,6 +131,7 @@ class LinkedList:
         return counts
 
     def find(self, value: object) -> bool:
+        '''method returns a bool based on whether or not the given value is in the list'''
         current = self._head
         for x in range(self.length()+1):
             if current.value == value:
@@ -131,14 +140,16 @@ class LinkedList:
         return False
 
     def slice(self, start_index: int, size: int) -> "LinkedList":
+        '''method returns a new LinkedList of given size, starting from the given start_index. Returns an exception
+        if the given slice based on start_index and size is invalid'''
         if start_index < 0 or start_index > self.length() - 1 or start_index + size > self.length() or size<0:
             raise SLLException
         current = self._head
-        for x in range(start_index):
+        for x in range(start_index):                            #for loop to get to the start of the slice
             current = current.next
         new_list = LinkedList()
         current = current.next
-        for x in range(size):
+        for x in range(size):                                   #add elements until we reach the size of our slice
             new_list.insert_back(current.value)
             current = current.next
         return new_list

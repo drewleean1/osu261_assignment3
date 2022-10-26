@@ -1,9 +1,11 @@
-# Name:
-# OSU Email:
+# Name: Andrew Lee
+# OSU Email: leea6@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 3
+# Due Date: 10/31/2022
+# Description: An implementation of a queue using linked lists. Included methods are enqueue, dequeue, and front
+
+
 
 from SLNode import SLNode
 
@@ -62,22 +64,31 @@ class Queue:
     # -----------------------------------------------------------------------
 
     def enqueue(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method adds given value to the back of the queue. Different cases depending on whether the head and/or tail
+        is empty, and the case when both are already assigned to nodes. '''
+        if self._head == None:
+            self._head = SLNode(value)
+        elif self._tail == None:
+            self._tail = SLNode(value)
+            self._head.next = self._tail
+        else:
+            new_node = SLNode(value)
+            self._tail.next = new_node
+            self._tail = new_node
 
     def dequeue(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method removes the first element in the list and returns it. Raises an exception if the queue is empty'''
+        if self.size() == 0:
+            raise QueueException
+        value_returned = self._head.value
+        self._head = self._head.next
+        return value_returned
 
     def front(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method returns the first element in the list. Raises an exception if the queue is empty'''
+        if self.size() == 0:
+            raise QueueException
+        return self._head.value
 
 
 # ------------------- BASIC TESTING -----------------------------------------

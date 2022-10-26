@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Andrew Lee
+# OSU Email: leea6@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 3
+# Due Date: 10/31/22
+# Description: An implementation of a stack data structure using singly linked lists
 
 
 from SLNode import SLNode
@@ -62,22 +62,23 @@ class Stack:
     # -----------------------------------------------------------------------
 
     def push(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method adds the given value to the top of the stack'''
+        new_head = SLNode(value,self._head)
+        self._head = new_head
 
     def pop(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method removes the top of the stack and returns the removed element, raises an exception if stack is empty'''
+        if self.size() == 0:
+            raise StackException
+        value_returned = self._head.value
+        self._head = self._head.next
+        return value_returned
 
     def top(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''method returns the top of the stack, raises an exception if stack is empty'''
+        if self.size() == 0:
+            raise StackException
+        return self._head.value
 
 # ------------------- BASIC TESTING -----------------------------------------
 
