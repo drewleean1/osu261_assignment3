@@ -3,7 +3,7 @@
 # Course: CS261 - Data Structures
 # Assignment: Assignment 3
 # Due Date: 10/31/2022
-# Description:
+# Description: An implementation of a queue using StaticArrays. Included methods are enqueue, dequeue, and front
 
 
 # Note: Changing any part of the pre-implemented methods (besides adding  #
@@ -67,43 +67,47 @@ class Queue:
     # ---------------------------------------------------------------------- #
 
     def enqueue(self, value: object) -> None:
-        if self.size() == self._sa.length():
+        '''method that adds the given value to the end of our queue'''
+        if self.size() == self._sa.length():                        #check if we need to resize
             new_sa = StaticArray(self._sa.length()*2)
             x = 0
             front = self._front
             for x in range(self.size()):
                 new_sa[x] = self._sa[front]
                 x += 1
-                if front + 1 >= self._sa.length():
+                if front + 1 == self._sa.length():                  #set front to 0 to avoid StaticArrayExceptions
                     front = 0
-                else: front += 1
+                else:
+                    front += 1
             self._sa = new_sa
             self._front = 0
-        if (self._front+self.size()) < self._sa.length():
+        if (self._front+self.size()) < self._sa.length():           #we add our value at index (self._front+self.size())
             self._sa[self._front+self.size()] = value
         else:
-            self._sa[abs(self._sa.length()-(self._front+self.size()))] = value          #try this for now
+            #our implementation of the circular buffer. If the index we need to add our value is greater than the length
+            #we need to wraparound/add it to the beginning of the SA, which we implement by taking the absolute value of
+            #self._sa.length()-(self._front+self.size()))
+            self._sa[abs(self._sa.length()-(self._front+self.size()))] = value
         self._current_size += 1
 
     def dequeue(self) -> object:
+        '''method that removes the element at the front of our queue and returns that element. Raises an exception if
+        the queue is empty'''
         if self.size() == 0:
             raise QueueException
         value_returned = self._sa[self._front]
-        #self._sa[self._front] = None
-        ##    self._front = 0
-        #else:
-        if self._front + 1 == self._sa.length():
+        if self._front + 1 == self._sa.length():                #setting a new front of the queue can be two cases
             self._front = 0
-        else: self._front += 1
-
+        else:
+            self._front += 1
         self._current_size -= 1
         return value_returned
 
     def front(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        '''returns the front of the queue and raises an exception if the queue is empty'''
+        if self.size() == 0:
+            raise QueueException
+        return self._sa[self._front]
 
     # The method below is optional, but recommended, to implement. #
     # You may alter it in any way you see fit.                     #
@@ -142,11 +146,7 @@ if __name__ == "__main__":
         q.enqueue(value)
     print(q)
     q.print_underlying_sa()
-    for value in [1,2,3,4,5]:
-        q.enqueue(value)
-    print(q)
-    q.print_underlying_sa()
-'''
+
     print("\n# front()")
     q = Queue()
     print(q)
@@ -206,4 +206,3 @@ if __name__ == "__main__":
     action_and_print("# Enqueue: 22, 24, 26, 28", q.enqueue,
                      [22, 24, 26, 28], q)
     action_and_print("# Enqueue: 30", q.enqueue, [30], q)
-'''
